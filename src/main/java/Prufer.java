@@ -1,8 +1,5 @@
 
-import org.graphstream.graph.EdgeRejectedException;
-import org.graphstream.graph.Graph;
-import org.graphstream.graph.IdAlreadyInUseException;
-import org.graphstream.graph.Node;
+import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.SingleGraph;
 
 import java.io.BufferedReader;
@@ -36,12 +33,12 @@ public class Prufer  {
             String[] numbersFromFile = text.split("\\s+");
 
 
-
-        Node A[] = new Node[numbersFromFile.length + 3];
-
-        for (int i = 0; i < numbersFromFile.length + 3; i++) {
-            A[i] = graph.addNode(String.valueOf(i));
-        }
+//
+//        Node A[] = new Node[numbersFromFile.length + 3];
+//
+//        for (int i = 0; i < numbersFromFile.length + 3; i++) {
+//            A[i] = graph.addNode(String.valueOf(i));
+//        }
 
 
         ArrayList<Integer> numbers = new ArrayList<Integer>();
@@ -63,7 +60,14 @@ public class Prufer  {
                             k = pruferArr.size();
                         } else if (pruferArr.get(k) != numbers.get(0) && k == (pruferArr.size() - 1)) {
                             String nameOfEdge = String.valueOf(pruferArr.get(0)) + String.valueOf(numbers.get(j));
-                            graph.addEdge(nameOfEdge, pruferArr.get(0), numbers.get(j));
+                           if(graph.getNode(String.valueOf(pruferArr.get(0)))==null){
+                               graph.addNode(String.valueOf(pruferArr.get(0)));
+                           }
+                            if(graph.getNode(String.valueOf(numbers.get(j)))==null){
+                                graph.addNode(String.valueOf(numbers.get(j)));
+                           }
+
+                            graph.addEdge(nameOfEdge, String.valueOf(pruferArr.get(0)), String.valueOf(numbers.get(j)));
                             k = pruferArr.size();
                             numbers.remove(j);
                             pruferArr.remove(0);
@@ -74,12 +78,17 @@ public class Prufer  {
                 }
             }
         } catch (IndexOutOfBoundsException e) {
+            if(graph.getNode(String.valueOf(numbers.get(numbers.size() - 2)))==null){
+                graph.addNode(String.valueOf(numbers.get(numbers.size() - 2)));
+            }
+            if(graph.getNode(String.valueOf(numbers.get(numbers.size() - 1)))==null){
+                graph.addNode(String.valueOf(numbers.get(numbers.size() - 1)));
+            }
             String nameOfEdge = String.valueOf(numbers.get(numbers.size() - 2) + String.valueOf(numbers.get(numbers.size() - 1)));
-            graph.addEdge(nameOfEdge, numbers.get(numbers.size() - 2), numbers.get(numbers.size() - 1));
-
-        } catch (IdAlreadyInUseException e) {
-            e.printStackTrace();
+            graph.addEdge(nameOfEdge, String.valueOf(numbers.get(numbers.size() - 2)), String.valueOf(numbers.get(numbers.size() - 1)));
         } catch (EdgeRejectedException e) {
+            e.printStackTrace();
+        }catch (NullPointerException e){
             e.printStackTrace();
         }
 
@@ -87,7 +96,9 @@ public class Prufer  {
             node.addAttribute("ui.label", node.getId());
         }
 
-        graph.removeNode(A[0]);
+        //graph.removeNode(A[0]);
+
+
         graph.display();
 
     }
