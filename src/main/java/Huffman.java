@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -6,7 +9,25 @@ public class Huffman {
     public static void main(String[] args) {
 
         HashMap<Character,Double> map = new HashMap<Character,Double>();
-        String s = "aaabbcdddd";
+       // String s = "dkjgdbgkdskgjlsdfgdsfgfd'fgd;gfdsgd;sgsd;gsd;gsd;l;";
+
+
+        String s = null;
+        try {
+            FileReader fileReader = new FileReader("huffman.txt");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            s = "";
+            String line = bufferedReader.readLine();
+
+            while (line != null) {
+                s += line;
+                line = bufferedReader.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         System.out.println("nr of chars: "+s.length());
 
@@ -37,6 +58,8 @@ public class Huffman {
         }
 
         while(it.hasNext()){
+
+
 
         }
 

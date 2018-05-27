@@ -5,22 +5,41 @@ import org.graphstream.graph.IdAlreadyInUseException;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class Prufer {
-    public static void main(String[] args) {
+public class Prufer  {
+    public static void main(String[] args) throws IOException {
 
 
         Graph graph = new SingleGraph("Prufer graph");
 
+            FileReader fileReader = new FileReader("pruffer.txt");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-        int[] prufer = {1, 3, 6, 11, 5, 5, 3, 6, 11};
+            String text = "";
+            String line = bufferedReader.readLine();
+            int lineNumber = 0;
+
+            while (line != null) {
+                lineNumber++;
+                if (lineNumber == 2) {
+                    text += line;
+                    lineNumber = 0;
+                }
+                line = bufferedReader.readLine();
+            }
+
+            String[] numbersFromFile = text.split("\\s+");
 
 
-        Node A[] = new Node[prufer.length + 3];
 
-        for (int i = 0; i < prufer.length + 3; i++) {
+        Node A[] = new Node[numbersFromFile.length + 3];
+
+        for (int i = 0; i < numbersFromFile.length + 3; i++) {
             A[i] = graph.addNode(String.valueOf(i));
         }
 
@@ -28,12 +47,12 @@ public class Prufer {
         ArrayList<Integer> numbers = new ArrayList<Integer>();
         ArrayList<Integer> pruferArr = new ArrayList<Integer>();
 
-        for (int i = 1; i < prufer.length + 3; i++) {
+        for (int i = 1; i < numbersFromFile.length + 3; i++) {
             numbers.add(i);
         }
 
-        for (int i = 0; i < prufer.length; i++) {
-            pruferArr.add(prufer[i]);
+        for (int i = 0; i < numbersFromFile.length; i++) {
+            pruferArr.add(Integer.parseInt(numbersFromFile[i]));
         }
 
         try {
