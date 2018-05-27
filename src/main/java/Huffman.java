@@ -43,8 +43,19 @@ public class Huffman {
                 graph.addNode(String.valueOf(key2));
             }
             map.remove(key2);
-            System.out.println("To jest char zrobiony z inta: "+(char)i);
+
             map.put(String.valueOf(i), value1+value2);
+
+            if (map.size()==1){
+
+                if(graph.getNode(String.valueOf(i))==null){
+                    graph.addNode(String.valueOf(i+" root"));
+                }
+                String nameOfEdge1 = String.valueOf(key1) + String.valueOf(i+" root");
+                String nameOfEdge2 = String.valueOf(key2) + String.valueOf(i+" root");
+                graph.addEdge(nameOfEdge1, String.valueOf(key1), String.valueOf(i+" root"));
+                graph.addEdge(nameOfEdge2, String.valueOf(key2), String.valueOf(i+" root"));
+            }
 
             if(graph.getNode(String.valueOf(i))==null){
                 graph.addNode(String.valueOf(i));
@@ -57,6 +68,8 @@ public class Huffman {
 
             System.out.println("******************************Iteration***********************************");
             displayHashMap(map);
+
+
         }
 
         for (Node node : graph) {
