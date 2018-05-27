@@ -8,15 +8,13 @@ import org.graphstream.graph.implementations.SingleGraph;
 import java.util.ArrayList;
 
 
-public class Main {
+public class Prufer {
     public static void main(String[] args) {
 
 
         Graph graph = new SingleGraph("Prufer graph");
 
-        // Martyny
-        // int[] prufer = {1, 3, 6, 11, 5, 5, 3, 6, 11};
-        //Seby
+
         int[] prufer = {1, 3, 6, 11, 5, 5, 3, 6, 11};
 
 

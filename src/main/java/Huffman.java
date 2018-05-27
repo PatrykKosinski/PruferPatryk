@@ -1,6 +1,3 @@
-import com.google.common.collect.HashMultiset;
-import com.google.common.collect.Multiset;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -10,8 +7,7 @@ public class Huffman {
 
         HashMap<Character,Double> map = new HashMap<Character,Double>();
         String s = "aaabbcdddd";
-//        s.replace(" ", "");
-//
+
         System.out.println("nr of chars: "+s.length());
 
         for(int i = 0; i < s.length(); i++){
@@ -29,7 +25,7 @@ public class Huffman {
         Iterator<Map.Entry <Character, Double> > it = map.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<Character, Double> pair = it.next();
-            Double newCount = (pair.getValue() == null) ? 1 : pair.getValue()/s.length() ;
+            Double newCount = (pair.getValue() == null) ? 0 : pair.getValue()/s.length() ;
             pair.setValue(newCount);
             sum += newCount;
         }
@@ -40,26 +36,11 @@ public class Huffman {
             System.out.println(key + " " + value);
         }
 
-
-
         while(it.hasNext()){
 
         }
 
         System.out.println("The sum of frequently is: " +sum );
-
-
-
-
-//        for(int i = 0; i < s.length(); i++){
-//            char c = s.charAt(i);
-//            Integer val = frequency.get(c);
-//            if(val != null){
-//                frequency.put(c, new Integer(val + 1));
-//            }else{
-//                frequency.put(c,1);
-//            }
-//        }
 
     }
 }
