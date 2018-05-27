@@ -96,8 +96,6 @@ public class Prufer  {
         }
 
         //graph.removeNode(A[0]);
-
-
         graph.display();
 
     }
