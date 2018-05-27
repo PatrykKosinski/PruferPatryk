@@ -70,6 +70,7 @@ public class Main {
             node.addAttribute("ui.label", node.getId());
         }
 
+        graph.removeNode(A[0]);
         graph.display();
 
     }
