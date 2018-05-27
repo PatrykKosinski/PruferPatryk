@@ -66,7 +66,6 @@ public class Prufer  {
                             if(graph.getNode(String.valueOf(numbers.get(j)))==null){
                                 graph.addNode(String.valueOf(numbers.get(j)));
                            }
-
                             graph.addEdge(nameOfEdge, String.valueOf(pruferArr.get(0)), String.valueOf(numbers.get(j)));
                             k = pruferArr.size();
                             numbers.remove(j);
